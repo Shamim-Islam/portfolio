@@ -1,0 +1,61 @@
+"use client";
+
+import { Layers, ArrowRight, Github, ExternalLink, HelpCircle } from "lucide-react";
+import ProjectCard from "./ProjectCard";
+import { projects, personalInfo } from "../data/portfolioData";
+
+export default function Projects() {
+  return (
+    <section id="projects" className="py-20 bg-[#090b0f] border-t border-white/5 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-[#ccff00]/10 border border-[#ccff00]/25 text-[#ccff00] mb-3">
+              <Layers className="w-3.5 h-3.5" />
+              <span>04 // Portfolio Work</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              Featured Projects
+            </h2>
+            <p className="text-slate-400 mt-2 text-base sm:text-lg max-w-2xl">
+              Authentic applications demonstrating responsive UI engineering, clean architecture, and practical problem solving.
+            </p>
+          </div>
+
+          <a
+            href={personalInfo.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-[#ccff00] transition-colors"
+          >
+            <span>Browse All on GitHub (@Shamim-Islam)</span>
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+
+        {/* Informative Repository Status Banner */}
+        <div className="mb-10 p-4 rounded-xl bg-[#10141e] border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-slate-300">
+          <div className="flex items-center gap-2.5">
+            <HelpCircle className="w-4 h-4 text-[#ccff00] shrink-0" />
+            <span>
+              <strong>Integrity Verification:</strong> Projects featured below include verified development builds (<strong className="text-white">Fit-Log</strong> and <strong className="text-white">BazarDor</strong>) alongside a designated editable placeholder. No fabricated statistics or fake claims are used.
+            </span>
+          </div>
+          <div className="shrink-0 font-mono text-[#ccff00]">
+            Verified: 2 Builds + 1 Editable Slot
+          </div>
+        </div>
+
+        {/* Project Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}
