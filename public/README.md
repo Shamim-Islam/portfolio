@@ -1,9 +1,10 @@
-# Public Assets Directory
+# Public Assets
 
-You can place your photos and screenshots in this directory:
-
-- `/public/portrait.jpg` (or `.png`): Your professional photo (recommended 600x600 px).
-- `/public/projects/fit-log.png`: Screenshot of the Fit-Log project.
-- `/public/projects/bazardor.png`: Screenshot of the BazarDor project.
-- `/public/projects/placeholder-project.png`: Screenshot of your 3rd project.
-- `/public/resume.pdf`: Your resume file once finalized.
+- `portrait.jpg` is the personal portrait used in the navbar and hero section.
+- `projects/fitlog.png`, `projects/bazardor.png`, `projects/pawmart.png`,
+  `projects/heroio.png`, `projects/devstack.png`, and `projects/samzone.png`
+  are the project screenshots used in the portfolio cards and detail pages.
+- To replace a screenshot, keep or update the matching `image` path in
+  `src/data/portfolioData.js`.
+- Add `resume.pdf` only when the resume is finalized; the current resume flow
+  intentionally indicates that it is still being prepared.

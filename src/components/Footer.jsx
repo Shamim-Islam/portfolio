@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Github, Mail, Phone, ArrowUp, Shield } from "lucide-react";
 import { personalInfo } from "../data/portfolioData";
 
@@ -17,9 +18,13 @@ export default function Footer({ onOpenResume }) {
           {/* Identity Column */}
           <div className="md:col-span-5 space-y-3">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-[#ccff00]/10 border border-[#ccff00]/40 flex items-center justify-center font-bold text-sm text-[#ccff00]">
-                AI
-              </div>
+              <Image
+                src="/portrait.jpg"
+                alt="Portrait of Aminul Islam"
+                width={32}
+                height={32}
+                className="h-8 w-8 rounded-full border border-[#ccff00]/40 object-cover"
+              />
               <span className="font-bold text-white text-lg">
                 {personalInfo.name}
               </span>
@@ -60,24 +65,24 @@ export default function Footer({ onOpenResume }) {
               Section Navigation
             </h4>
             <div className="grid grid-cols-2 gap-2 text-xs sm:text-sm">
-              <a href="/#about" className="hover:text-[#ccff00] transition-colors">
+              <Link href="/#about" className="hover:text-[#ccff00] transition-colors">
                 About Me
-              </a>
-              <a href="/#skills" className="hover:text-[#ccff00] transition-colors">
+              </Link>
+              <Link href="/#skills" className="hover:text-[#ccff00] transition-colors">
                 Dev Skills
-              </a>
-              <a href="/#security" className="hover:text-[#ccff00] transition-colors">
+              </Link>
+              <Link href="/#security" className="hover:text-[#ccff00] transition-colors">
                 Security
-              </a>
-              <a href="/#projects" className="hover:text-[#ccff00] transition-colors">
+              </Link>
+              <Link href="/#projects" className="hover:text-[#ccff00] transition-colors">
                 Projects
-              </a>
-              <a href="/#education" className="hover:text-[#ccff00] transition-colors">
+              </Link>
+              <Link href="/#education" className="hover:text-[#ccff00] transition-colors">
                 Education
-              </a>
-              <a href="/#contact" className="hover:text-[#ccff00] transition-colors">
+              </Link>
+              <Link href="/#contact" className="hover:text-[#ccff00] transition-colors">
                 Contact
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -87,14 +92,14 @@ export default function Footer({ onOpenResume }) {
               Portfolio Integrity
             </h4>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Strictly presents verified educational background (BSS Completed) and genuine projects (Fit-Log, BazarDor). No unverified certifications or fake metrics.
+              Showcasing owner-verified projects and an active web security learning journey. No unverified certifications or achievement claims.
             </p>
             <div className="pt-2">
               <button
                 onClick={onOpenResume}
                 className="text-xs font-mono text-[#ccff00] hover:underline flex items-center gap-1"
               >
-                <span>Check Resume Status</span> &rarr;
+                <span>Request a Resume</span> &rarr;
               </button>
             </div>
           </div>

@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone, Github, Send, Check, Copy, MessageSquare } from "lucide-react";
+import { Mail, Phone, Send, Check, Copy, MessageSquare } from "lucide-react";
 import { personalInfo } from "../data/portfolioData";
+import SocialLinks from "./SocialLinks";
 
 export default function Contact() {
   const [copiedEmail, setCopiedEmail] = useState(false);
@@ -10,16 +11,24 @@ export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
   const [status, setStatus] = useState(null);
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(personalInfo.email);
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2000);
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(personalInfo.email);
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2000);
+    } catch {
+      setStatus({ type: "error", message: "Unable to copy the email. Please select it manually." });
+    }
   };
 
-  const handleCopyPhone = () => {
-    navigator.clipboard.writeText(personalInfo.phone);
-    setCopiedPhone(true);
-    setTimeout(() => setCopiedPhone(false), 2000);
+  const handleCopyPhone = async () => {
+    try {
+      await navigator.clipboard.writeText(personalInfo.phone);
+      setCopiedPhone(true);
+      setTimeout(() => setCopiedPhone(false), 2000);
+    } catch {
+      setStatus({ type: "error", message: "Unable to copy the phone number. Please select it manually." });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -134,30 +143,21 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* GitHub Card */}
-            <div className="p-5 rounded-2xl bg-[#10141f] border border-white/10 hover:border-[#ccff00]/40 transition-colors">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-white/5 text-slate-200">
-                    <Github className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="text-xs text-slate-400">GitHub Profile</div>
-                    <div className="text-sm font-bold text-white">
-                      @{personalInfo.githubUsername}
-                    </div>
-                  </div>
-                </div>
-
-                <a
-                  href={personalInfo.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="py-1.5 px-3 rounded-lg bg-white/5 hover:bg-white/10 text-[#ccff00] font-semibold text-xs border border-white/10 transition-colors"
-                >
-                  View Repositories
-                </a>
+            <div className="space-y-3">
+              <div>
+                <h3 className="text-sm font-bold text-white">Social Profiles</h3>
+                <p className="mt-1 text-xs text-slate-400">
+                  Links open in a new tab. Missing profile URLs are marked as pending.
+                </p>
               </div>
+              <SocialLinks
+                networks={[
+                  "github",
+                  "facebook",
+                  "linkedin",
+                  "tryhackme",
+                ]}
+              />
             </div>
 
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowRight, Github, Mail, FileText, Shield, Terminal, Code2, Sparkles } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Github, Mail, FileText, Shield, Terminal } from "lucide-react";
 import { personalInfo } from "../data/portfolioData";
 
 export default function Hero({ onOpenResume }) {
@@ -13,13 +14,17 @@ export default function Hero({ onOpenResume }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Headline & CTAs */}
-          <div className="lg:col-span-7 space-y-6 text-left">
+          <div className="lg:col-span-6 space-y-6 text-left">
             {/* Status Indicator */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#131822] border border-white/10 text-xs text-slate-300">
               <span className="w-2 h-2 rounded-full bg-[#ccff00] animate-pulse" />
-              <span className="font-medium text-slate-200">Open to Opportunities</span>
+              <span className="font-medium text-slate-200">
+                Open to Opportunities
+              </span>
               <span className="text-slate-500">•</span>
-              <span className="text-[#ccff00]">Web Dev &amp; Security Learner</span>
+              <span className="text-[#ccff00]">
+                Web Dev &amp; Security Learner
+              </span>
             </div>
 
             {/* Main Headline */}
@@ -31,7 +36,8 @@ export default function Hero({ onOpenResume }) {
                 Aminul Islam
               </h1>
               <h2 className="text-2xl sm:text-3xl font-semibold text-slate-300">
-                Web Developer <span className="text-white/40 font-light">|</span>{" "}
+                Web Developer{" "}
+                <span className="text-white/40 font-light">|</span>{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ccff00] to-emerald-400">
                   Web Security Learner
                 </span>
@@ -43,15 +49,19 @@ export default function Hero({ onOpenResume }) {
               I build responsive, high-performance web applications using modern{" "}
               <span className="text-white font-medium">JavaScript</span>,{" "}
               <span className="text-white font-medium">React</span>, and{" "}
-              <span className="text-white font-medium">Next.js</span> with Tailwind CSS. Driven by curiosity for system internals, I actively explore{" "}
-              <span className="text-[#ccff00] font-medium">Web Security</span> and OWASP principles through authorized hands-on training labs.
+              <span className="text-white font-medium">Next.js</span> with
+              Tailwind CSS. Driven by curiosity for system internals, I actively
+              explore{" "}
+              <span className="text-[#ccff00] font-medium">Web Security</span>{" "}
+              and OWASP principles through authorized hands-on training labs.
             </p>
 
             {/* Verification Note for Clarity */}
             <div className="flex items-center gap-2 text-xs font-mono text-slate-400 bg-white/[0.03] p-2.5 rounded-lg border border-white/5 max-w-xl">
               <Terminal className="w-4 h-4 text-[#ccff00] shrink-0" />
               <span>
-                Portfolio Identity: <strong className="text-white">Aminul Islam</strong> • GitHub:{" "}
+                Portfolio Identity:{" "}
+                <strong className="text-white">Aminul Islam</strong> • GitHub:{" "}
                 <a
                   href={personalInfo.github}
                   target="_blank"
@@ -84,13 +94,10 @@ export default function Hero({ onOpenResume }) {
               <button
                 onClick={onOpenResume}
                 className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white/[0.04] border border-dashed border-white/20 hover:border-[#ccff00]/60 text-slate-300 hover:text-[#ccff00] font-medium text-sm sm:text-base transition-all"
-                title="View Resume Status"
+                title="Open resume information"
               >
                 <FileText className="w-4 h-4 text-[#ccff00]" />
                 <span>Resume</span>
-                <span className="px-1.5 py-0.5 rounded text-[10px] bg-[#ccff00]/10 text-[#ccff00] border border-[#ccff00]/20">
-                  In Progress
-                </span>
               </button>
 
               <a
@@ -105,51 +112,28 @@ export default function Hero({ onOpenResume }) {
               </a>
             </div>
 
-            {/* Highlights Bar */}
-            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-white/10 max-w-xl">
-              <div className="bg-[#10141d] p-3 rounded-xl border border-white/5">
-                <div className="text-xl font-bold text-[#ccff00]">BSS</div>
-                <div className="text-xs text-slate-400">Completed Degree</div>
-              </div>
-              <div className="bg-[#10141d] p-3 rounded-xl border border-white/5">
-                <div className="text-xl font-bold text-white">Fit-Log &amp; BazarDor</div>
-                <div className="text-xs text-slate-400">Featured Builds</div>
-              </div>
-              <div className="bg-[#10141d] p-3 rounded-xl border border-white/5">
-                <div className="text-xl font-bold text-[#ccff00]">Labs &amp; OWASP</div>
-                <div className="text-xs text-slate-400">Security Learner</div>
-              </div>
-            </div>
           </div>
 
-          {/* Right Column: Professional Portrait Placeholder Card */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-sm sm:max-w-md">
+          {/* Right Column: Personal Portrait */}
+          <div className="lg:col-span-6 flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-md">
               {/* Outer Decorative Glow Border Card */}
               <div className="relative rounded-3xl bg-gradient-to-b from-white/10 to-white/5 p-1">
                 <div className="rounded-[22px] bg-[#0f131c] border border-white/10 p-6 sm:p-7 relative overflow-hidden">
-                  
-                  {/* Portrait Placeholder Container */}
-                  <div className="relative aspect-square rounded-2xl bg-[#131826] border border-white/10 flex flex-col items-center justify-center p-6 text-center group overflow-hidden">
-                    {/* Background subtle mesh */}
-                    <div className="absolute inset-0 bg-grid-pattern opacity-30" />
-                    <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#ccff00]/10 rounded-full blur-2xl" />
-
-                    {/* Attractive Avatar Silhouette & Placeholder Icon */}
-                    <div className="relative z-10 w-24 h-24 rounded-2xl bg-gradient-to-br from-[#ccff00]/20 to-[#10141d] border border-[#ccff00]/40 flex items-center justify-center text-[#ccff00] mb-4 shadow-lime-sm">
-                      <Code2 className="w-12 h-12 text-[#ccff00]" />
-                    </div>
-
-                    <div className="relative z-10 space-y-1">
-                      <div className="font-bold text-lg text-white">Aminul Islam</div>
-                      <div className="text-xs font-mono text-[#ccff00]">@Shamim-Islam</div>
-                    </div>
-
-                    {/* Replaceable Portrait Badge */}
-                    <div className="relative z-10 mt-4 px-3 py-1.5 rounded-lg bg-black/60 border border-dashed border-white/20 text-[11px] text-slate-300">
-                      <span>📸 Replaceable Photo Placeholder</span>
-                      <p className="text-[10px] text-slate-400 mt-0.5">
-                        Add photo to <code className="text-[#ccff00]">/public/portrait.jpg</code>
+                  <div className="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-[#131826]">
+                    <Image
+                      src="/portrait.jpg"
+                      alt="Portrait of Aminul Islam"
+                      fill
+                      priority
+                      sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 400px"
+                      className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#090b0f]/90 via-transparent to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-5 text-left sm:p-6">
+                      <p className="text-xl font-bold text-white">Aminul Islam</p>
+                      <p className="mt-1 text-xs font-mono text-[#ccff00]">
+                        @Shamim-Islam
                       </p>
                     </div>
                   </div>
@@ -162,8 +146,12 @@ export default function Hero({ onOpenResume }) {
                           <Terminal className="w-4 h-4" />
                         </div>
                         <div>
-                          <div className="text-xs font-semibold text-white">Frontend Architecture</div>
-                          <div className="text-[11px] text-slate-400">React.js, Next.js, Tailwind CSS</div>
+                          <div className="text-xs font-semibold text-white">
+                            Frontend Architecture
+                          </div>
+                          <div className="text-[11px] text-slate-400">
+                            React.js, Next.js, Tailwind CSS
+                          </div>
                         </div>
                       </div>
                       <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-[#ccff00] border border-white/5">
@@ -177,8 +165,12 @@ export default function Hero({ onOpenResume }) {
                           <Shield className="w-4 h-4" />
                         </div>
                         <div>
-                          <div className="text-xs font-semibold text-white">Web Security Foundations</div>
-                          <div className="text-[11px] text-slate-400">HTTP, OWASP Awareness, Safe Labs</div>
+                          <div className="text-xs font-semibold text-white">
+                            Web Security Foundations
+                          </div>
+                          <div className="text-[11px] text-slate-400">
+                            HTTP, OWASP Awareness, Safe Labs
+                          </div>
                         </div>
                       </div>
                       <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
@@ -186,7 +178,6 @@ export default function Hero({ onOpenResume }) {
                       </span>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>

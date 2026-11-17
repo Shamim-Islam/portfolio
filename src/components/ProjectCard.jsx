@@ -1,44 +1,42 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, Github, ExternalLink, Layers, CheckCircle } from "lucide-react";
 
 export default function ProjectCard({ project }) {
-  const isPlaceholder = project.isPlaceholder;
-
   return (
     <div
-      className={`rounded-2xl flex flex-col justify-between overflow-hidden transition-all duration-300 group ${
-        isPlaceholder
-          ? "bg-[#0d1118] border border-dashed border-white/20 hover:border-[#ccff00]/50"
-          : "bg-[#111622] border border-white/10 hover:border-[#ccff00]/40 hover:shadow-lime-sm"
-      }`}
+      className="rounded-2xl flex flex-col justify-between overflow-hidden transition-all duration-300 group bg-[#111622] border border-white/10 hover:border-[#ccff00]/40 hover:shadow-lime-sm"
     >
       <div>
-        {/* Card Header & Preview Image Placeholder */}
-        <div className="relative aspect-video w-full bg-[#151c2a] border-b border-white/10 flex flex-col items-center justify-center p-6 text-center overflow-hidden">
-          {/* Subtle background decoration */}
-          <div className="absolute inset-0 bg-grid-pattern opacity-20" />
-          <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#ccff00]/10 rounded-full blur-xl group-hover:bg-[#ccff00]/20 transition-all" />
-
-          {/* Icon / Project Category */}
-          <div className="relative z-10 w-12 h-12 rounded-xl bg-black/40 border border-white/10 flex items-center justify-center text-[#ccff00] mb-3 group-hover:scale-110 transition-transform">
-            <Layers className="w-6 h-6" />
-          </div>
-
-          <div className="relative z-10">
-            <h4 className="text-lg font-bold text-white group-hover:text-[#ccff00] transition-colors">
-              {project.title}
-            </h4>
-            <p className="text-xs text-slate-400 mt-0.5">
-              {project.category}
-            </p>
-          </div>
-
-          {/* Replaceable screenshot note badge */}
-          <div className="relative z-10 mt-3 px-2.5 py-1 rounded bg-black/60 border border-white/10 text-[10px] text-slate-300">
-            {isPlaceholder ? "⚠️ Editable 3rd Project Placeholder" : "🖼️ Replaceable Screenshot Slot"}
-          </div>
+        <div className="relative aspect-video w-full overflow-hidden border-b border-white/10 bg-[#151c2a]">
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={`${project.title} project screenshot`}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+            />
+          ) : (
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+              <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+              <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[#ccff00]/10 blur-xl transition-all group-hover:bg-[#ccff00]/20" />
+              <div className="relative z-10 mb-3 flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-black/40 text-[#ccff00] transition-transform group-hover:scale-110">
+                <Layers className="h-6 w-6" />
+              </div>
+              <span className="relative z-10 text-sm font-bold text-white">
+                {project.title}
+              </span>
+              <span className="relative z-10 mt-1 text-xs text-slate-400">
+                {project.category}
+              </span>
+            </div>
+          )}
+          <span className="absolute bottom-3 left-3 rounded border border-white/10 bg-[#090b0f]/85 px-2.5 py-1 text-[10px] text-slate-200 backdrop-blur">
+            {project.image ? "Project screenshot" : "Replaceable screenshot placeholder"}
+          </span>
         </div>
 
         {/* Card Body */}
@@ -83,7 +81,7 @@ export default function ProjectCard({ project }) {
           href={`/projects/${project.slug}`}
           className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#ccff00] hover:text-white transition-colors"
         >
-          <span>View Full Case Study</span>
+          <span>View Details</span>
           <ArrowUpRight className="w-4 h-4" />
         </Link>
 
@@ -95,7 +93,7 @@ export default function ProjectCard({ project }) {
               rel="noopener noreferrer"
               aria-label={`GitHub Repo for ${project.title}`}
               className="p-2 rounded-lg bg-white/5 border border-white/10 hover:border-white/20 text-slate-300 hover:text-white transition-colors"
-              title="GitHub Profile / Repository"
+              title={`Client repository for ${project.title}`}
             >
               <Github className="w-4 h-4" />
             </a>
@@ -107,6 +105,7 @@ export default function ProjectCard({ project }) {
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg bg-[#ccff00]/10 border border-[#ccff00]/30 text-[#ccff00] hover:bg-[#ccff00] hover:text-[#090b0f] transition-all"
+              aria-label={`Live demo for ${project.title}`}
               title="Live Demo"
             >
               <ExternalLink className="w-4 h-4" />
@@ -114,9 +113,9 @@ export default function ProjectCard({ project }) {
           ) : (
             <span
               className="text-[10px] font-mono px-2 py-1 rounded bg-white/5 text-slate-400 border border-white/5"
-              title="Deployment URL pending / draft"
+              title="No live demo URL provided"
             >
-              Live URL (Draft)
+              Demo unavailable
             </span>
           )}
         </div>

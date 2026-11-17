@@ -1,9 +1,12 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Aminul Islam | Web Developer & Web Security Learner",
+  title: {
+    default: "Aminul Islam | Web Developer & Web Security Learner",
+    template: "%s | Aminul Islam",
+  },
   description:
-    "Portfolio of Aminul Islam (Shamim-Islam) - Aspiring Full-Stack Web Developer & Web Security Learner. Showcasing responsive web projects (Fit-Log, BazarDor) and hands-on security foundations.",
+    "Portfolio of Aminul Islam (Shamim-Islam), a Web Developer and Web Security Learner. Explore responsive web projects, verified GitHub repositories, and an honest security-learning journey.",
   keywords: [
     "Aminul Islam",
     "Shamim-Islam",
@@ -15,8 +18,22 @@ export const metadata = {
     "Tailwind CSS",
     "BazarDor",
     "Fit-Log",
+    "PawMart",
+    "Hero-IO",
+    "DevStack",
   ],
   authors: [{ name: "Aminul Islam" }],
+  openGraph: {
+    type: "website",
+    title: "Aminul Islam | Web Developer & Web Security Learner",
+    description:
+      "Web development projects and an honest web security learning journey.",
+    siteName: "Aminul Islam Portfolio",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }) {

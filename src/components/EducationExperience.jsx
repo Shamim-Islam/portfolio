@@ -1,6 +1,6 @@
 "use client";
 
-import { GraduationCap, Briefcase, Calendar, CheckCircle2, AlertCircle } from "lucide-react";
+import { GraduationCap, Briefcase, Calendar, CheckCircle2 } from "lucide-react";
 import { education, learningExperience } from "../data/portfolioData";
 
 export default function EducationExperience() {
@@ -54,12 +54,6 @@ export default function EducationExperience() {
                   </p>
                 </div>
 
-                <div className="flex items-start gap-2.5 p-3 rounded-lg bg-white/[0.02] border border-dashed border-white/10 text-xs text-slate-400">
-                  <AlertCircle className="w-4 h-4 text-[#ccff00] shrink-0 mt-0.5" />
-                  <span>
-                    <strong>Integrity Note:</strong> Specific university name and graduation session are not pre-populated to strictly avoid inventing unverified information. Easily editable in <code className="text-[#ccff00]">src/data/portfolioData.js</code>.
-                  </span>
-                </div>
               </div>
             </div>
 

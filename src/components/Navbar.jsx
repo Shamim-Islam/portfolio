@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, Github, FileText, ArrowUpRight } from "lucide-react";
 import { personalInfo } from "../data/portfolioData";
 
@@ -36,15 +37,20 @@ export default function Navbar({ onOpenResume }) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo / Brand Name */}
+          {/* Profile / Brand Name */}
           <Link
             href="/"
             className="group flex items-center gap-3 focus:outline-none"
             aria-label="Aminul Islam - Home"
           >
-            <div className="w-10 h-10 rounded-xl bg-[#ccff00]/10 border border-[#ccff00]/40 flex items-center justify-center font-bold text-lg text-[#ccff00] group-hover:bg-[#ccff00] group-hover:text-[#090b0f] transition-all duration-200">
-              AI
-            </div>
+            <Image
+              src="/portrait.jpg"
+              alt="Portrait of Aminul Islam"
+              width={40}
+              height={40}
+              priority
+              className="h-10 w-10 rounded-full border border-[#ccff00]/40 object-cover transition-colors group-hover:border-[#ccff00]"
+            />
             <div className="flex flex-col">
               <span className="font-bold text-base sm:text-lg tracking-tight text-white group-hover:text-[#ccff00] transition-colors">
                 {personalInfo.name}
@@ -56,7 +62,7 @@ export default function Navbar({ onOpenResume }) {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Main Navigation">
+          <nav className="hidden lg:flex items-center gap-1 lg:gap-2" aria-label="Main Navigation">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -69,7 +75,7 @@ export default function Navbar({ onOpenResume }) {
           </nav>
 
           {/* Action CTAs */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             {/* GitHub Profile */}
             <a
               href={personalInfo.github}
@@ -86,13 +92,10 @@ export default function Navbar({ onOpenResume }) {
             <button
               onClick={onOpenResume}
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-white/5 border border-white/10 text-slate-200 hover:border-[#ccff00]/50 hover:text-[#ccff00] transition-all"
-              aria-label="View Resume Status"
+              aria-label="Open resume information"
             >
               <FileText className="w-3.5 h-3.5 text-[#ccff00]" />
               <span>Resume</span>
-              <span className="ml-1 px-1.5 py-0.2 text-[10px] bg-[#ccff00]/10 text-[#ccff00] rounded-md border border-[#ccff00]/20">
-                Draft
-              </span>
             </button>
 
             {/* Contact CTA */}
@@ -106,7 +109,7 @@ export default function Navbar({ onOpenResume }) {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex sm:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-2">
             <button
               onClick={onOpenResume}
               className="px-2.5 py-1 rounded-lg text-xs font-medium bg-white/5 border border-white/10 text-slate-200"
@@ -117,6 +120,7 @@ export default function Navbar({ onOpenResume }) {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-[#ccff00]"
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
               aria-label="Toggle navigation menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -127,7 +131,11 @@ export default function Navbar({ onOpenResume }) {
 
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="sm:hidden bg-[#0e121a] border-b border-white/10 px-4 pt-3 pb-6 space-y-2 animate-fadeIn">
+        <nav
+          id="mobile-navigation"
+          aria-label="Mobile navigation"
+          className="lg:hidden bg-[#0e121a] border-b border-white/10 px-4 pt-3 pb-6 space-y-2 animate-fadeIn"
+        >
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -157,7 +165,7 @@ export default function Navbar({ onOpenResume }) {
               <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
-        </div>
+        </nav>
       )}
     </header>
   );

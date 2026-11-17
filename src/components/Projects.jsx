@@ -1,6 +1,6 @@
 "use client";
 
-import { Layers, ArrowRight, Github, ExternalLink, HelpCircle } from "lucide-react";
+import { Layers, ArrowRight } from "lucide-react";
 import ProjectCard from "./ProjectCard";
 import { projects, personalInfo } from "../data/portfolioData";
 
@@ -20,7 +20,7 @@ export default function Projects() {
               Featured Projects
             </h2>
             <p className="text-slate-400 mt-2 text-base sm:text-lg max-w-2xl">
-              Authentic applications demonstrating responsive UI engineering, clean architecture, and practical problem solving.
+              Genuine web projects demonstrating responsive UI engineering, thoughtful structure, and practical problem solving.
             </p>
           </div>
 
@@ -33,19 +33,6 @@ export default function Projects() {
             <span>Browse All on GitHub (@Shamim-Islam)</span>
             <ArrowRight className="w-4 h-4" />
           </a>
-        </div>
-
-        {/* Informative Repository Status Banner */}
-        <div className="mb-10 p-4 rounded-xl bg-[#10141e] border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-slate-300">
-          <div className="flex items-center gap-2.5">
-            <HelpCircle className="w-4 h-4 text-[#ccff00] shrink-0" />
-            <span>
-              <strong>Integrity Verification:</strong> Projects featured below include verified development builds (<strong className="text-white">Fit-Log</strong> and <strong className="text-white">BazarDor</strong>) alongside a designated editable placeholder. No fabricated statistics or fake claims are used.
-            </span>
-          </div>
-          <div className="shrink-0 font-mono text-[#ccff00]">
-            Verified: 2 Builds + 1 Editable Slot
-          </div>
         </div>
 
         {/* Project Cards Grid */}

@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X, FileText, Mail, ExternalLink, Check, AlertCircle } from "lucide-react";
+import { X, FileText, Mail, ExternalLink, Check } from "lucide-react";
 import { personalInfo } from "../data/portfolioData";
 
 export default function ResumeModal({ isOpen, onClose }) {
   const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -25,10 +26,16 @@ export default function ResumeModal({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText(personalInfo.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(personalInfo.email);
+      setCopied(true);
+      setCopyError(false);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      setCopied(false);
+      setCopyError(true);
+    }
   };
 
   return (
@@ -47,7 +54,7 @@ export default function ResumeModal({ isOpen, onClose }) {
         <button
           onClick={onClose}
           className="absolute top-4 right-4 p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-colors"
-          aria-label="Close resume status dialog"
+          aria-label="Close resume dialog"
         >
           <X className="w-5 h-5" />
         </button>
@@ -58,26 +65,18 @@ export default function ResumeModal({ isOpen, onClose }) {
             <FileText className="w-6 h-6" />
           </div>
           <div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-500/10 border border-amber-500/30 text-amber-300">
-              <AlertCircle className="w-3 h-3" />
-              Notice: Under Revision
-            </div>
-            <h3 id="modal-title" className="text-xl font-bold text-white mt-1">
-              Resume In Preparation
+            <h3 id="modal-title" className="text-xl font-bold text-white">
+              Resume
             </h3>
           </div>
         </div>
 
         {/* Content */}
         <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
-          Thank you for your interest! <span className="font-semibold text-white">Aminul Islam&apos;s</span> formal CV is currently being updated with recent development project metrics (Fit-Log, BazarDor) and web application security coursework.
+          For information about my experience, projects, and skills, please get in touch.
         </p>
 
         <div className="bg-[#0b0e14] rounded-xl p-4 border border-white/5 mb-6 space-y-2 text-xs sm:text-sm text-slate-300">
-          <div className="flex justify-between items-center py-1 border-b border-white/5">
-            <span className="text-slate-400">Candidate Name:</span>
-            <span className="text-white font-medium">Aminul Islam</span>
-          </div>
           <div className="flex justify-between items-center py-1 border-b border-white/5">
             <span className="text-slate-400">Current Focus:</span>
             <span className="text-[#ccff00] font-medium">Web Developer | Web Security Learner</span>
@@ -92,10 +91,6 @@ export default function ResumeModal({ isOpen, onClose }) {
             >
               github.com/Shamim-Islam <ExternalLink className="w-3 h-3" />
             </a>
-          </div>
-          <div className="flex justify-between items-center py-1">
-            <span className="text-slate-400">Status:</span>
-            <span className="text-emerald-400 font-medium">Available for Opportunities</span>
           </div>
         </div>
 
@@ -126,6 +121,11 @@ export default function ResumeModal({ isOpen, onClose }) {
               )}
             </button>
           </div>
+          {copyError && (
+            <p className="text-center text-xs text-rose-300">
+              Unable to copy automatically. Please select the email manually.
+            </p>
+          )}
 
           <a
             href={personalInfo.github}

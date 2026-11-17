@@ -1,7 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   ArrowLeft,
+  ArrowRight,
   Github,
   ExternalLink,
   Layers,
@@ -20,21 +22,23 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }) {
-  const project = projects.find((p) => p.slug === params.slug);
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
   if (!project) {
     return {
-      title: "Project Not Found | Aminul Islam",
+      title: "Project Not Found",
     };
   }
   return {
-    title: `${project.title} | Case Study - Aminul Islam`,
+    title: `${project.title} Case Study`,
     description: project.tagline,
   };
 }
 
-export default function ProjectDetailsPage({ params }) {
-  const project = projects.find((p) => p.slug === params.slug);
+export default async function ProjectDetailsPage({ params }) {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
     notFound();
@@ -80,15 +84,9 @@ export default function ProjectDetailsPage({ params }) {
               <span className="px-3 py-1 rounded-full text-xs font-mono font-medium bg-[#ccff00]/10 border border-[#ccff00]/25 text-[#ccff00]">
                 {project.category}
               </span>
-              {project.isPlaceholder ? (
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-mono bg-amber-500/10 border border-amber-500/30 text-amber-300">
-                  Editable 3rd Project Placeholder
-                </span>
-              ) : (
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-mono bg-emerald-500/10 border border-emerald-500/30 text-emerald-300">
-                  Verified Portfolio Build
-                </span>
-              )}
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-mono bg-emerald-500/10 border border-emerald-500/30 text-emerald-300">
+                Verified Portfolio Build
+              </span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
@@ -114,6 +112,19 @@ export default function ProjectDetailsPage({ params }) {
                 </a>
               )}
 
+              {project.serverRepo && (
+                <a
+                  href={project.serverRepo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-slate-200 transition-all hover:border-[#ccff00]/40 hover:bg-white/10 hover:text-white"
+                >
+                  <Github className="h-4 w-4 text-slate-300" />
+                  <span>Backend Repository ({project.serverRepoLabel})</span>
+                  <ExternalLink className="h-3.5 w-3.5 text-slate-400" />
+                </a>
+              )}
+
               {project.liveUrl ? (
                 <a
                   href={project.liveUrl}
@@ -127,32 +138,40 @@ export default function ProjectDetailsPage({ params }) {
               ) : (
                 <div className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white/[0.03] border border-dashed border-white/20 text-slate-400 text-xs sm:text-sm font-mono">
                   <AlertCircle className="w-4 h-4 text-amber-400" />
-                  <span>Live URL: Draft (Add URL when deployed to Vercel)</span>
+                  <span>No publicly verified live demo is available.</span>
                 </div>
               )}
             </div>
           </div>
 
           {/* Screenshot / Replaceable Visual Container */}
-          <div className="relative rounded-2xl bg-[#111622] border border-white/10 overflow-hidden p-6 sm:p-12 text-center flex flex-col items-center justify-center min-h-[300px] sm:min-h-[400px]">
-            <div className="absolute inset-0 bg-grid-pattern opacity-25" />
-            <div className="absolute -top-20 -left-20 w-60 h-60 bg-[#ccff00]/10 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="relative z-10 w-16 h-16 rounded-2xl bg-black/60 border border-[#ccff00]/30 flex items-center justify-center text-[#ccff00] mb-4 shadow-lime-sm">
-              <Code2 className="w-8 h-8" />
-            </div>
-
-            <h3 className="relative z-10 text-xl font-bold text-white mb-2">
-              {project.title} Interface Preview
-            </h3>
-
-            <p className="relative z-10 text-sm text-slate-400 max-w-md mb-6 leading-relaxed">
-              {project.imagePlaceholderText}
-            </p>
-
-            <div className="relative z-10 px-4 py-2 rounded-xl bg-black/70 border border-white/15 text-xs text-slate-300 font-mono">
-              💡 Tip: Place your screenshot in <code className="text-[#ccff00]">/public/projects/{project.slug}.png</code>
-            </div>
+          <div className="relative rounded-2xl bg-[#111622] border border-white/10 overflow-hidden min-h-[300px] sm:min-h-[400px]">
+            {project.image ? (
+              <Image
+                src={project.image}
+                alt={`${project.title} project screenshot`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="object-contain"
+              />
+            ) : (
+              <div className="p-6 sm:p-12 text-center flex flex-col items-center justify-center min-h-[300px] sm:min-h-[400px]">
+                <div className="absolute inset-0 bg-grid-pattern opacity-25" />
+                <div className="absolute -top-20 -left-20 w-60 h-60 bg-[#ccff00]/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="relative z-10 w-16 h-16 rounded-2xl bg-black/60 border border-[#ccff00]/30 flex items-center justify-center text-[#ccff00] mb-4 shadow-lime-sm">
+                  <Code2 className="w-8 h-8" />
+                </div>
+                <h3 className="relative z-10 text-xl font-bold text-white mb-2">
+                  Screenshot pending
+                </h3>
+                <p className="relative z-10 text-sm text-slate-400 max-w-md mb-6 leading-relaxed">
+                  {project.imagePlaceholderText}
+                </p>
+                <div className="relative z-10 px-4 py-2 rounded-xl bg-black/70 border border-white/15 text-xs text-slate-300 font-mono">
+                  Add a verified image at <code className="text-[#ccff00]">/public/projects/{project.slug}.png</code>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Project Details Grid */}
@@ -192,16 +211,69 @@ export default function ProjectDetailsPage({ params }) {
                 </div>
               </section>
 
-              {/* Engineering Challenges & Future Improvements */}
+              {/* Purpose */}
               <section className="space-y-3">
                 <h2 className="text-xl font-bold text-white flex items-center gap-2">
                   <Compass className="w-5 h-5 text-[#ccff00]" />
-                  Engineering Challenges &amp; Future Improvements
+                  Project Purpose
+                </h2>
+                <div className="p-6 rounded-2xl bg-[#10141e] border border-white/5 text-slate-300 leading-relaxed text-base">
+                  {project.purpose}
+                </div>
+              </section>
+
+              {/* Implementation Details */}
+              <section className="space-y-3">
+                <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                  <Code2 className="w-5 h-5 text-[#ccff00]" />
+                  Implementation Details
+                </h2>
+                <div className="p-6 rounded-2xl bg-[#10141e] border border-white/5 space-y-3">
+                  {project.implementationDetails.map((detail, dIdx) => (
+                    <div key={dIdx} className="flex items-start gap-3 text-sm sm:text-base text-slate-300 leading-relaxed">
+                      <CheckCircle className="w-4 h-4 text-[#ccff00] shrink-0 mt-1" />
+                      <span>{detail}</span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* Engineering Challenges */}
+              <section className="space-y-3">
+                <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                  <Compass className="w-5 h-5 text-[#ccff00]" />
+                  Development Challenges
                 </h2>
                 <div className="p-6 rounded-2xl bg-[#10141e] border border-white/5 space-y-4 text-sm sm:text-base text-slate-300">
-                  {project.challenges.map((ch, cIdx) => (
-                    <div key={cIdx} className="p-4 rounded-xl bg-[#151c2a] border border-white/5 leading-relaxed">
-                      {ch}
+                  {project.challenges.length > 0 ? (
+                    project.challenges.map((challenge, index) => (
+                      <div
+                        key={index}
+                        className="rounded-xl border border-white/5 bg-[#151c2a] p-4 leading-relaxed"
+                      >
+                        {challenge}
+                      </div>
+                    ))
+                  ) : (
+                    <p className="leading-relaxed text-slate-400">
+                      No specific development challenges have been documented
+                      yet. Add verified project notes here when available.
+                    </p>
+                  )}
+                </div>
+              </section>
+
+              {/* Future Improvements */}
+              <section className="space-y-3">
+                <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                  <ArrowRight className="w-5 h-5 text-[#ccff00]" />
+                  Possible Future Improvements
+                </h2>
+                <div className="p-6 rounded-2xl bg-[#10141e] border border-white/5 space-y-3">
+                  {project.futureImprovements.map((improvement, iIdx) => (
+                    <div key={iIdx} className="flex items-start gap-3 text-sm sm:text-base text-slate-300 leading-relaxed">
+                      <ArrowRight className="w-4 h-4 text-[#ccff00] shrink-0 mt-1" />
+                      <span>{improvement}</span>
                     </div>
                   ))}
                 </div>
@@ -228,16 +300,35 @@ export default function ProjectDetailsPage({ params }) {
                     </span>
                   ))}
                 </div>
+                {project.backendTechnologies?.length > 0 && (
+                  <div className="border-t border-white/5 pt-4">
+                    <h4 className="mb-3 text-sm font-semibold text-slate-200">
+                      Backend Technologies
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {project.backendTechnologies.map((technology) => (
+                        <span
+                          key={technology}
+                          className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-mono text-slate-200"
+                        >
+                          {technology}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Verification & Transparency Badge */}
               <div className="p-6 rounded-2xl bg-[#10141e] border border-white/10 space-y-3 text-xs text-slate-400">
                 <div className="font-semibold text-white flex items-center gap-2">
                   <AlertCircle className="w-4 h-4 text-[#ccff00]" />
-                  Strict Integrity Standard
+                  Repository-verified notes
                 </div>
                 <p className="leading-relaxed">
-                  All details here represent genuine implementation specifications. If any links are draft, they are highlighted clearly rather than fabricating live addresses.
+                  Project details and technology lists are based on the linked
+                  repositories. Missing screenshots, undocumented challenges,
+                  and unavailable demos are called out instead of guessed.
                 </p>
                 <div className="pt-2 border-t border-white/5 font-mono text-[#ccff00]">
                   Author: Aminul Islam (@Shamim-Islam)
@@ -265,7 +356,7 @@ export default function ProjectDetailsPage({ params }) {
           </div>
 
           {/* Bottom Back Button */}
-          <div className="pt-8 border-t border-white/10 flex justify-between items-center">
+          <div className="pt-8 border-t border-white/10 flex flex-col items-start gap-4 sm:flex-row sm:justify-between sm:items-center">
             <Link
               href="/#projects"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-slate-200 hover:text-white font-medium text-sm transition-colors"

@@ -1,7 +1,7 @@
 "use client";
 
-import { Code, ShieldCheck, Cpu, GitBranch, Edit3 } from "lucide-react";
-import { aboutMe, personalInfo } from "../data/portfolioData";
+import { Code, ShieldCheck, Cpu, GitBranch } from "lucide-react";
+import { aboutMe } from "../data/portfolioData";
 
 export default function About() {
   const iconMap = {
@@ -37,14 +37,6 @@ export default function About() {
               </p>
             ))}
 
-            {/* Editable note for the user */}
-            <div className="flex items-start gap-2.5 p-3.5 rounded-xl bg-white/[0.02] border border-dashed border-white/10 text-xs text-slate-400">
-              <Edit3 className="w-4 h-4 text-[#ccff00] shrink-0 mt-0.5" />
-              <div>
-                <span className="font-semibold text-slate-300">Developer Note: </span>
-                This introductory text is kept strictly truthful to your verified background. You can fine-tune or extend this text anytime in <code className="text-[#ccff00] font-mono">src/data/portfolioData.js</code>.
-              </div>
-            </div>
           </div>
 
           {/* Core Pillars Cards */}
