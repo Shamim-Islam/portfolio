@@ -23,6 +23,11 @@ export const metadata = {
     "DevStack",
   ],
   authors: [{ name: "Aminul Islam" }],
+  icons: {
+    icon: "/portrait.jpg",
+    shortcut: "/portrait.jpg",
+    apple: "/portrait.jpg",
+  },
   openGraph: {
     type: "website",
     title: "Aminul Islam | Web Developer & Web Security Learner",

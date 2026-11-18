@@ -9,8 +9,8 @@ export const personalInfo = {
   github: "https://github.com/Shamim-Islam",
   githubUsername: "Shamim-Islam",
   email: "shamimislam844gm@gmail.com",
-  phone: "01992089543",
-  phoneLink: "tel:01992089543",
+  phone: "+8801992089543",
+  phoneLink: "tel:+8801992089543",
   location: "Bangladesh",
   status: "Available for Web Development & Junior Opportunities",
 };

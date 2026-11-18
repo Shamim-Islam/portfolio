@@ -114,68 +114,70 @@ export default function Hero({ onOpenResume }) {
 
           </div>
 
-          {/* Right Column: Personal Portrait */}
+          {/* Right Column: Portrait and Focus Areas */}
           <div className="lg:col-span-6 flex justify-center lg:justify-end">
             <div className="relative w-full max-w-md">
-              {/* Outer Decorative Glow Border Card */}
-              <div className="relative rounded-3xl bg-gradient-to-b from-white/10 to-white/5 p-1">
-                <div className="rounded-[22px] bg-[#0f131c] border border-white/10 p-6 sm:p-7 relative overflow-hidden">
-                  <div className="group relative aspect-square overflow-hidden rounded-2xl border border-white/10 bg-[#131826]">
+              <div className="absolute -inset-4 rounded-[2.25rem] border border-[#ccff00]/10 rotate-2" />
+              <div className="absolute -inset-4 rounded-[2.25rem] border border-white/5 -rotate-2" />
+
+              <div className="relative rounded-[2rem] bg-gradient-to-br from-[#ccff00]/30 via-white/10 to-emerald-400/20 p-px shadow-2xl shadow-black/40">
+                <div className="rounded-[calc(2rem-1px)] bg-[#0c1017] p-3 sm:p-4">
+                  <div className="group relative aspect-[4/4.5] overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#131826]">
                     <Image
                       src="/portrait.jpg"
                       alt="Portrait of Aminul Islam"
                       fill
                       priority
                       sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 400px"
-                      className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+                      className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#090b0f]/90 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#090b0f] via-[#090b0f]/10 to-black/10" />
+
+                    <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#090b0f]/65 px-3 py-1.5 text-[10px] font-medium tracking-wide text-slate-200 backdrop-blur-md sm:left-5 sm:top-5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#ccff00]" />
+                      WEB DEVELOPMENT &amp; SECURITY
+                    </div>
+
                     <div className="absolute inset-x-0 bottom-0 p-5 text-left sm:p-6">
-                      <p className="text-xl font-bold text-white">Aminul Islam</p>
-                      <p className="mt-1 text-xs font-mono text-[#ccff00]">
+                      <p className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                        Aminul Islam
+                      </p>
+                      <p className="mt-1 font-mono text-sm text-[#ccff00]">
                         @Shamim-Islam
+                      </p>
+                      <p className="mt-3 max-w-xs text-sm leading-relaxed text-slate-300">
+                        Building for the web. Learning to make it safer.
                       </p>
                     </div>
                   </div>
 
-                  {/* Floating Badges */}
-                  <div className="mt-5 space-y-2.5">
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-[#161c28] border border-white/5">
+                  <div className="mt-3 grid grid-cols-2 gap-3">
+                    <div className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-3.5 sm:p-4">
                       <div className="flex items-center gap-2.5">
-                        <div className="p-2 rounded-lg bg-[#ccff00]/10 text-[#ccff00]">
-                          <Terminal className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-xs font-semibold text-white">
-                            Frontend Architecture
-                          </div>
-                          <div className="text-[11px] text-slate-400">
-                            React.js, Next.js, Tailwind CSS
-                          </div>
-                        </div>
+                        <span className="rounded-xl bg-[#ccff00]/10 p-2 text-[#ccff00]">
+                          <Terminal className="h-4 w-4" />
+                        </span>
+                        <span className="text-xs font-semibold text-white sm:text-sm">
+                          Web Development
+                        </span>
                       </div>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-[#ccff00] border border-white/5">
-                        Active
-                      </span>
+                      <p className="mt-3 text-[11px] leading-relaxed text-slate-400 sm:text-xs">
+                        JavaScript · React · Next.js
+                      </p>
                     </div>
 
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-[#161c28] border border-white/5">
+                    <div className="rounded-2xl border border-white/[0.07] bg-white/[0.035] p-3.5 sm:p-4">
                       <div className="flex items-center gap-2.5">
-                        <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
-                          <Shield className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="text-xs font-semibold text-white">
-                            Web Security Foundations
-                          </div>
-                          <div className="text-[11px] text-slate-400">
-                            HTTP, OWASP Awareness, Safe Labs
-                          </div>
-                        </div>
+                        <span className="rounded-xl bg-emerald-400/10 p-2 text-emerald-300">
+                          <Shield className="h-4 w-4" />
+                        </span>
+                        <span className="text-xs font-semibold text-white sm:text-sm">
+                          Web Security
+                        </span>
                       </div>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                        Learner
-                      </span>
+                      <p className="mt-3 text-[11px] leading-relaxed text-slate-400 sm:text-xs">
+                        Learning · Authorized labs
+                      </p>
                     </div>
                   </div>
                 </div>
